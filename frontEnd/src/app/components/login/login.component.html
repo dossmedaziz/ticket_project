@@ -1,0 +1,30 @@
+<div class="container">
+  <h2>Login</h2>
+  <form class="row g-3" [formGroup]="loginForm">
+    <div class="col-md-6">
+      <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="email">
+          <label for="floatingInput">Email </label>
+            <div *ngIf="email.touched && email.invalid">
+              <small *ngIf="email.errors.required"class="text-danger">Email is required <br> </small>
+              <small *ngIf="email.errors.email" class="text-danger">Email is invalid<br></small>
+          </div>
+      </div>
+  </div>
+      <div class="col-md-6"></div>
+     
+     
+      <div class="col-md-6">
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="password">
+            <label for="floatingInput">Password </label>
+            <div *ngIf="password.touched && password.invalid">
+              <small *ngIf="password.errors.required"class="text-danger">Password is required <br> </small>
+          </div>
+        </div>
+    </div>
+  </form>
+  <div class="col-12">
+      <button type="submit" class="btn btn-primary" (click)="login()" [disabled]="loginForm.invalid ">Login</button>
+      </div>
+</div>

@@ -1,0 +1,134 @@
+<div class="b-example-divider"></div>
+
+<div class="container px-4 py-5" id="custom-cards">
+  <h2 class="pb-2 border-bottom">Custom cards</h2>
+
+  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div *ngFor="let t of myTickets">
+    <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');">
+        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+          <strong class="d-inline-block mb-2 text-{{filterStatus(t.status).color}}">{{filterStatus(t.status).text}}</strong>
+
+          <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ t.subject}}</h2>
+          <ul class="d-flex list-unstyled mt-auto">
+            <li class="d-flex align-items-center">
+              <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+             <a [routerLink]="['/moreInfo',t.id]"> More Info </a>
+            </li>
+
+            <li class="d-flex align-items-center">
+                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"/></svg>
+               <a data-bs-toggle="modal" data-bs-target="#exampleModal2" href="" (click)="openmodal(t)"> UPdate </a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+
+<div class="alert alert-danger mx" role="alert" *ngIf="!myTickets.length">
+    You have no Tickets yet
+   </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="resetForm()">
+    Add new ticket
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ticket</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="ticketForm">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput"  formControlName="category">
+                <label for="floatingInput">Category</label>
+                <div *ngIf="category.touched && category.invalid">
+                    <small *ngIf="category.errors.required"class="text-danger">category is required <br> </small>
+                    <small  *ngIf="category.errors.pattern" class="text-danger">Invalid category <br></small>
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingPassword" formControlName="subject"> 
+                <label for="floatingPassword">Subject</label>
+                <div *ngIf="subject.touched && subject.invalid">
+                    <small *ngIf="subject.errors.required"class="text-danger">category is required <br> </small>
+                    <small  *ngIf="subject.errors.pattern" class="text-danger">Invalid category <br></small>
+                </div>
+              </div>
+
+              <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"formControlName="description"></textarea>
+                <label for="floatingTextarea2">Description</label>
+                <div *ngIf="description.touched && description.invalid">
+                    <small *ngIf="description.errors.required"class="text-danger">category is required <br> </small>
+                    <small  *ngIf="description.errors.pattern" class="text-danger">Invalid category <br></small>
+                </div>
+              </div>
+            </form>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addTicket()" [disabled]="ticketForm.invalid">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="ticketForm">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput"  formControlName="category">
+                <label for="floatingInput">Category</label>
+                <div *ngIf="category.touched && category.invalid">
+                    <small *ngIf="category.errors.required"class="text-danger">category is required <br> </small>
+                    <small  *ngIf="category.errors.pattern" class="text-danger">Invalid category <br></small>
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingPassword" formControlName="subject"> 
+                <label for="floatingPassword">Subject</label>
+                <div *ngIf="subject.touched && subject.invalid">
+                    <small *ngIf="subject.errors.required"class="text-danger">category is required <br> </small>
+                    <small  *ngIf="subject.errors.pattern" class="text-danger">Invalid category <br></small>
+                </div>
+              </div>
+
+              <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"formControlName="description"></textarea>
+                <label for="floatingTextarea2">Description</label>
+                <div *ngIf="description.touched && description.invalid">
+                    <small *ngIf="description.errors.required"class="text-danger">category is required <br> </small>
+                    <small  *ngIf="description.errors.pattern" class="text-danger">Invalid category <br></small>
+                </div>
+              </div>
+            </form>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="update()" [disabled]="ticketForm.invalid">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 

@@ -1,0 +1,27 @@
+
+  <div class="container">
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <small>@{{ticket.user.name}}</small> <br>
+            <small><a href="">Category: </a>{{ticket.category}}</small>
+          <h1 class="display-5 fw-bold">{{ticket.subject}}</h1>
+          <p class="col-md-8 fs-4">{{ticket.description}}</p>
+        </div>
+      </div>
+
+      
+      <h2>Replies</h2>
+      <div *ngFor="let r of replies">
+      <div class="col-md-12 my-5">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>@{{r.user.name}}</h2>
+          <p>{{r.content}}</p>
+        </div>
+      </div>
+</div>
+<div class="form-floating">
+    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" [(ngModel)]="content"></textarea>
+    <label for="floatingTextarea2">Comments</label>
+  </div>
+  <button class="btn btn-primary my-2" (click)="reply()" [disabled]="content.length == 0">Reply</button>
+  </div>

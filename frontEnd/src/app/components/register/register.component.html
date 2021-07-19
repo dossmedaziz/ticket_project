@@ -1,0 +1,50 @@
+    <div class="container">
+        <h2>Join Us </h2>
+        <form class="row g-3" [formGroup]="registerForm">
+            <div class="col-6">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="John DOE" formControlName="name">
+                    <label for="floatingInput"> Name</label>
+                    <div *ngIf="name.touched && name.invalid">
+                        <small *ngIf="name.errors.required"class="text-danger">Name is required <br> </small>
+                        <small  *ngIf="name.errors.pattern" class="text-danger">Invalid name <br></small>
+                        <small *ngIf="name.errors.minlength" class="text-danger">Name must contain 4 characters at least<br></small>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="email">
+                    <label for="floatingInput">Email </label>
+                      <div *ngIf="email.touched && email.invalid">
+                        <small *ngIf="email.errors.required"class="text-danger">Email is required <br> </small>
+                        <small *ngIf="email.errors.email" class="text-danger">Email is invalid<br></small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="password">
+                    <label for="floatingInput">Password </label>
+                    <div *ngIf="password.touched && password.invalid">
+                      <small *ngIf="password.errors.required"class="text-danger">Password is required <br> </small>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="conf_password">
+                    <label for="floatingInput">Confirm Password </label>
+                    <div *ngIf="conf_password.touched">
+                        <small *ngIf="conf_password.value != password.value"class="text-danger">Password dont match <br> </small>
+                    </div>
+                </div>
+            </div>
+           
+          
+        </form>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary" (click)="register()" [disabled]="registerForm.invalid || password.value != conf_password.value ">Join</button>
+            </div>
+    </div>

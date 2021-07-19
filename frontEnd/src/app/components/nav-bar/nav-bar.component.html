@@ -1,0 +1,23 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">
+       Tickets
+      </a>
+
+      <div class="d-flex" *ngIf="!isConnected">
+          <button class="btn btn-primary"  [routerLink]="['/login']">Login</button>
+          <button class="btn btn-success mx-2" [routerLink]="['/register']">Register</button>
+      </div>
+      <div class="dropdown text-end" *ngIf="isConnected">
+        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+        </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" [routerLink]="['/admin']" *ngIf="isAdmin">Administration</a></li>
+          <li><a class="dropdown-item" [routerLink]="['/myTickets']">My tickets</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" (click)="logout()">Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
